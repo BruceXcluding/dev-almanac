@@ -1,0 +1,13 @@
+{
+  "name": "dev-almanac",
+  "description": "程序员黄历 + 今日星运 for Claude Code: a playful, offline daily almanac and horoscope.",
+  "owner": {
+    "name": "BruceXcluding"
+  },
+  "plugins": [
+    {
+      "name": "dev-almanac",
+      "source": "./"
+    }
+  ]
+}
