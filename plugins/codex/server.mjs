@@ -114,12 +114,14 @@ export const TOOLS = [
       },
       additionalProperties: false,
     },
+    annotations: { title: "Today's almanac", readOnlyHint: true, openWorldHint: false },
   },
   {
     name: 'draw_fortune_slip',
     description:
       'Draw a fortune slip (求签): one of 100 slips from 上上签 to 下下签, each with a code-themed couplet. Each draw gives a new slip. Show the slip to the user as returned.',
     inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+    annotations: { title: 'Draw a fortune slip', readOnlyHint: false, destructiveHint: false, openWorldHint: false },
   },
   {
     name: 'set_almanac_birthday',
@@ -131,6 +133,7 @@ export const TOOLS = [
       required: ['birthday'],
       additionalProperties: false,
     },
+    annotations: { title: 'Save the birthday', readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false },
   },
   {
     name: 'set_almanac_language',
@@ -141,6 +144,7 @@ export const TOOLS = [
       required: ['language'],
       additionalProperties: false,
     },
+    annotations: { title: 'Set the language', readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false },
   },
 ]
 

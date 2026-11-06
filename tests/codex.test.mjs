@@ -87,6 +87,10 @@ test('the manifest, the MCP config, the skill and the marketplace agree', () => 
   assert.equal(plugin.name, 'dev-almanac')
   assert.equal(plugin.mcpServers, './.mcp.json')
   assert.deepEqual(mcp.mcpServers['dev-almanac'].args, ['server.mjs'])
+  // codex exec cannot ask: the tools run without a prompt (they only touch their own settings file).
+  assert.equal(mcp.mcpServers['dev-almanac'].default_tools_approval_mode, 'approve')
+  assert.equal(TOOLS[0].annotations.readOnlyHint, true)
+  for (const t of TOOLS) assert.equal(t.annotations.openWorldHint, false)
   assert.equal(market.plugins[0].source.path, './plugins/codex')
   assert.equal(market.plugins[0].version, plugin.version)
   const skill = readFileSync(new URL('plugins/codex/skills/almanac/SKILL.md', root), 'utf8')
