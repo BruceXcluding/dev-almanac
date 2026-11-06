@@ -231,7 +231,16 @@ describe('lucky colours follow the five elements', () => {
   test('2026-11-05 癸未 is 杨柳木, so its colours are of 水 (水生木)', () => {
     const t = todayFor({ y: 2026, m: 11, d: 5 }, zh)
     expect(t.almanac.naYin).toEqual({ name: '杨柳木', element: '木' })
-    expect(['天青', '黛蓝']).toContain(t.horoscopeOf(0).color.name)
+    expect(['天青', '黛蓝', '靛青', '水绿']).toContain(t.horoscopeOf(0).color.name)
+  })
+
+  test('four colours to every element, so the twelve signs of a day show several', () => {
+    for (const e of ['木', '火', '土', '金', '水'] as const) expect(COLORS.filter(c => c.element === e)).toHaveLength(4)
+    for (let d = 1; d <= 30; d++) {
+      const t = todayFor({ y: 2026, m: 11, d }, zh)
+      const seen = new Set(Array.from({ length: 12 }, (_, s) => t.horoscopeOf(s).color.name))
+      expect(seen.size).toBeGreaterThanOrEqual(3)
+    }
   })
 })
 

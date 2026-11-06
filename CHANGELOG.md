@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## 0.8.1 - 2026-11-06
+
+### Changed
+- Four lucky colours to every element (twenty in all: 松绿, 柳绿, 绛红, 赭石, 秋香, 月白, 香槟, 靛青, 水绿 join the palette), so a day's twelve signs show several colours while keeping the 五行 rule.
+- The README sets out the design principles the mod is built by.
+
 ## 0.8.0 - 2026-11-06
 
 ### Changed

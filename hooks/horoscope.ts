@@ -44,8 +44,8 @@ type Pair = readonly [string, string]
 const L = (p: Pair, lang: Lang) => (lang === 'zh' ? p[0] : p[1])
 
 /**
- * Lucky colours, planned as one palette: ten traditional Chinese colours,
- * each with a coder's nickname, grouped by the five elements. All sit in the
+ * Lucky colours, planned as one palette: twenty traditional Chinese colours,
+ * each with a coder's nickname, four to each of the five elements. All sit in the
  * middle of the lightness range with similar strength, so any of them reads
  * as a border or a swatch on a light or a dark theme, and none outshouts the
  * warm paper of the almanac. No violet or lavender: the design guidance this
@@ -56,15 +56,24 @@ const L = (p: Pair, lang: Lang) => (lang === 'zh' ? p[0] : p[1])
 export const COLORS: readonly { name: Pair; nickname: Pair; hex: string; element: Element }[] = [
   { name: ['竹青', 'bamboo green'], nickname: ['终端绿', 'terminal green'], hex: '#5b8c5a', element: '木' },
   { name: ['碧青', 'jade teal'], nickname: ['Solarized 青', 'Solarized cyan'], hex: '#2a9d8f', element: '木' },
+  { name: ['松绿', 'pine green'], nickname: ['CI 通过绿', 'CI-pass green'], hex: '#3f7d64', element: '木' },
+  { name: ['柳绿', 'willow green'], nickname: ['新分支绿', 'fresh-branch green'], hex: '#7f9f4a', element: '木' },
   { name: ['朱砂', 'cinnabar'], nickname: ['报错红', 'stack-trace red'], hex: '#c8553d', element: '火' },
   { name: ['柿橙', 'persimmon'], nickname: ['Rust 橙', 'Rust orange'], hex: '#d9733a', element: '火' },
   { name: ['胭脂', 'rouge'], nickname: ['樱花粉', 'sakura pink'], hex: '#c25b7a', element: '火' },
+  { name: ['绛红', 'crimson lake'], nickname: ['热修复红', 'hotfix red'], hex: '#a63d40', element: '火' },
   { name: ['藤黄', 'gamboge'], nickname: ['警告黄', 'warning yellow'], hex: '#d4a32a', element: '土' },
   { name: ['檀褐', 'sandalwood'], nickname: ['咖啡棕', 'espresso brown'], hex: '#9c6b4a', element: '土' },
+  { name: ['赭石', 'ochre'], nickname: ['日志黄', 'log-file amber'], hex: '#b8743a', element: '土' },
+  { name: ['秋香', 'autumn olive'], nickname: ['祖传代码绿', 'legacy-code olive'], hex: '#a39a4a', element: '土' },
   { name: ['银灰', 'silver'], nickname: ['暗黑模式灰', 'dark-mode gray'], hex: '#8d99a6', element: '金' },
   { name: ['赤金', 'old gold'], nickname: ['发版金', 'release gold'], hex: '#b8924a', element: '金' },
+  { name: ['月白', 'moon white'], nickname: ['浅色模式白', 'light-mode white'], hex: '#9fb3c4', element: '金' },
+  { name: ['香槟', 'champagne'], nickname: ['上线香槟', 'launch champagne'], hex: '#c4a874', element: '金' },
   { name: ['天青', 'celadon blue'], nickname: ['VS Code 蓝', 'VS Code blue'], hex: '#4a90c2', element: '水' },
   { name: ['黛蓝', 'indigo ink'], nickname: ['深夜蓝', 'midnight blue'], hex: '#3d5a80', element: '水' },
+  { name: ['靛青', 'indigo'], nickname: ['Docker 蓝', 'Docker blue'], hex: '#2f6690', element: '水' },
+  { name: ['水绿', 'water teal'], nickname: ['运维青', 'ops teal'], hex: '#4f9fa3', element: '水' },
 ]
 
 const ITEMS: readonly Pair[] = [
