@@ -2,13 +2,13 @@
 
 <p align="center"><strong>A programmer's almanac and daily horoscope for dsh (DeepSeek Harness).</strong></p>
 
-<p align="center"><sub>程序员黄历 · 今日星运 · 求签 · offline · deterministic · no tokens</sub></p>
+<p align="center"><sub>Chinese almanac · daily horoscope · fortune slips · offline · deterministic · no tokens</sub></p>
 
 This is the dsh version of [dev-almanac](https://github.com/BruceXcluding/dev-almanac). It uses the same almanac, horoscope and fortune-slip code as the Claude Code mod.
 
 | Part | What it does |
 | --- | --- |
-| **程序员黄历 tab** | A tab in the right sidebar with the full day: the seasonal postcard, 宜/忌, 冲煞, 节气, the twelve 时辰, the horoscope, your birthday and the 签筒 |
+| **Almanac tab** | A tab in the right sidebar with the full day: the seasonal postcard, the do and don't lists, the clash, the solar term, the twelve double-hours, the horoscope, your birthday and the fortune tube |
 | `/almanac` | Shows today's almanac as text. `/almanac en` or `/almanac zh` sets the language. `/almanac birthday 1997-06-01` sets your birthday. |
 | `/qiuqian` | Draws a fortune slip. Each draw gives a new slip. |
 | `almanac_today` tool | Lets the agent read today's almanac |
@@ -23,7 +23,8 @@ This is the dsh version of [dev-almanac](https://github.com/BruceXcluding/dev-al
    ```
 
 3. Restart dsh.
-4. Open a session, click **+** in the right sidebar, and select **程序员黄历**.
+4. Open a session, click **+** in the right sidebar, and select the almanac tab. Its name is **程序员黄历** in Chinese, the default, and **Programmer's almanac** in English.
+5. To show the tab in English, press **🌐 English** at its top.
 
 ## Settings
 

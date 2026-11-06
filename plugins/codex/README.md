@@ -1,6 +1,6 @@
 # dev-almanac for Codex
 
-A Codex plugin with the [dev-almanac](../../README.md) tools: today's programmer's almanac (程序员黄历), a daily horoscope and fortune slips. It uses the same almanac code as the Claude Code mod and the dsh plugin.
+A Codex plugin with the [dev-almanac](../../README.md) tools: today's programmer's almanac, a daily horoscope and fortune slips. It uses the same almanac code as the Claude Code mod and the dsh plugin.
 
 ## Install
 
@@ -24,17 +24,19 @@ The plugin needs Node.js 20 or later on your `PATH`.
 
 Ask Codex in your own words:
 
-- "今天黄历怎么说？"
+- "What does the almanac say about today?"
 - "What does the almanac say about deploying today?"
-- "帮我求一支签", then "再摇一次"
+- "Draw me a fortune slip", then "Shake again"
 - "My birthday is 1997-06-01"
-- "看看天蝎座今天的运势"
+- "Show me today's horoscope for Scorpio"
+
+Codex understands the same requests in Chinese.
 
 | Tool | What it does |
 | --- | --- |
-| `almanac_today` | Shows the lunar date, 宜/忌 as coding tasks, 冲煞, 节气, lucky hours and a horoscope |
+| `almanac_today` | Shows the lunar date, the do and don't lists as coding tasks, the clash, the solar term, the lucky hours and a horoscope |
 | `draw_fortune_slip` | Draws one of 100 fortune slips. Each draw gives a new slip. |
-| `set_almanac_birthday` | Saves your birthday, for your sign and 生肖 |
+| `set_almanac_birthday` | Saves your birthday, for your sign and your Chinese zodiac animal |
 | `set_almanac_language` | Sets the language to `zh` or `en` |
 
 ## Settings and privacy
