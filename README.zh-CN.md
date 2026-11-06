@@ -59,6 +59,17 @@ claude plugin install dev-almanac --marketplace BruceXcluding/dev-almanac
 
 仓库里还有 dsh 版本，位于 [`packages/dsh`](packages/dsh/README.md)：右侧栏的「程序员黄历」标签页、`/almanac` 和 `/qiuqian` 命令，以及供 agent 调用的 `almanac_today` 工具。它和 Claude Code mod 使用同一套黄历代码。
 
+### Codex
+
+仓库里还有 Codex 插件，位于 [`plugins/codex`](plugins/codex/README.md)，为 Codex 提供四个工具：`almanac_today`、`draw_fortune_slip`、`set_almanac_birthday` 和 `set_almanac_language`。用以下命令安装：
+
+```bash
+codex plugin marketplace add BruceXcluding/dev-almanac
+codex plugin add dev-almanac@dev-almanac
+```
+
+然后对 Codex 说「今天黄历怎么说？」或「帮我求一支签」。
+
 ## 命令
 
 | 命令 | 作用 |

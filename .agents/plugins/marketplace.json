@@ -1,0 +1,13 @@
+{
+  "name": "dev-almanac",
+  "interface": { "displayName": "dev-almanac" },
+  "plugins": [
+    {
+      "name": "dev-almanac",
+      "version": "0.1.0",
+      "source": { "source": "local", "path": "./plugins/codex" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Lifestyle"
+    }
+  ]
+}

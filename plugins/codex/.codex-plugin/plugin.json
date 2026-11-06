@@ -1,0 +1,23 @@
+{
+  "name": "dev-almanac",
+  "version": "0.1.0",
+  "description": "程序员黄历 + 今日星运 for Codex: today's almanac with 宜/忌 as coding tasks, a daily horoscope, and fortune slips. Offline, no tokens of its own.",
+  "author": { "name": "BruceXcluding", "url": "https://github.com/BruceXcluding" },
+  "homepage": "https://github.com/BruceXcluding/dev-almanac/tree/main/plugins/codex",
+  "license": "MIT",
+  "keywords": ["almanac", "huangli", "horoscope", "lunar", "fortune", "fun", "mcp"],
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Programmer's almanac",
+    "shortDescription": "程序员黄历: what today is good and bad for, as coding tasks",
+    "longDescription": "A Chinese almanac (黄历) translated for programmers. 宜嫁娶 means merge branches today; 忌动土 means leave the database schema alone. Also a daily horoscope for the twelve signs with lucky colors by the five elements, and 100 code-themed fortune slips. Everything is computed on this machine from the date. Tools: almanac_today, draw_fortune_slip, set_almanac_birthday, set_almanac_language.",
+    "developerName": "BruceXcluding",
+    "category": "Lifestyle",
+    "capabilities": ["Read"],
+    "logo": "./assets/icon.svg",
+    "composerIcon": "./assets/icon.svg",
+    "defaultPrompt": ["今天黄历怎么说？", "帮我求一支签", "What does the almanac say about deploying today?"],
+    "brandColor": "#b83227"
+  }
+}

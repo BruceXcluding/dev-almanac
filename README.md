@@ -59,6 +59,17 @@ The desktop app does not run `/plugin`. In the app, do these steps:
 
 The repository also has a dsh version in [`packages/dsh`](packages/dsh/README.md). It gives a 程序员黄历 tab in the right sidebar, the `/almanac` and `/qiuqian` commands, and an `almanac_today` tool for the agent. It uses the same almanac code as the Claude Code mod.
 
+### Codex
+
+The repository also has a Codex plugin in [`plugins/codex`](plugins/codex/README.md). It gives Codex four tools: `almanac_today`, `draw_fortune_slip`, `set_almanac_birthday` and `set_almanac_language`. To install it, run these commands:
+
+```bash
+codex plugin marketplace add BruceXcluding/dev-almanac
+codex plugin add dev-almanac@dev-almanac
+```
+
+Then ask Codex "今天黄历怎么说？" or "帮我求一支签".
+
 ## Commands
 
 | Command | What it does |
