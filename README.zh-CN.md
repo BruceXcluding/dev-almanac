@@ -55,6 +55,10 @@ claude plugin install dev-almanac --marketplace BruceXcluding/dev-almanac
 2. 点击 **Add marketplace**，输入 `BruceXcluding/dev-almanac`。
 3. 点击 **Add plugin**。
 
+### dsh（DeepSeek Harness）
+
+仓库里还有 dsh 版本，位于 [`packages/dsh`](packages/dsh/README.md)：右侧栏的「程序员黄历」标签页、`/almanac` 和 `/qiuqian` 命令，以及供 agent 调用的 `almanac_today` 工具。它和 Claude Code mod 使用同一套黄历代码。
+
 ## 命令
 
 | 命令 | 作用 |

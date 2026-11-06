@@ -55,6 +55,10 @@ The desktop app does not run `/plugin`. In the app, do these steps:
 2. Click **Add marketplace** and type `BruceXcluding/dev-almanac`.
 3. Click **Add plugin**.
 
+### dsh (DeepSeek Harness)
+
+The repository also has a dsh version in [`packages/dsh`](packages/dsh/README.md). It gives a 程序员黄历 tab in the right sidebar, the `/almanac` and `/qiuqian` commands, and an `almanac_today` tool for the agent. It uses the same almanac code as the Claude Code mod.
+
 ## Commands
 
 | Command | What it does |

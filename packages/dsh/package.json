@@ -1,0 +1,49 @@
+{
+  "name": "dsh-dev-almanac",
+  "version": "0.1.0",
+  "description": "程序员黄历 + 今日星运 for dsh: a playful, offline daily almanac and horoscope. Adds a right-sidebar tab, the /almanac and /qiuqian commands, and the almanac_today tool.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./client": "./client/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "src",
+    "client",
+    "vendor",
+    "locale/*.json",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "cordis", "almanac", "huangli", "horoscope", "lunar"],
+  "author": "BruceXcluding",
+  "license": "MIT",
+  "homepage": "https://github.com/BruceXcluding/dev-almanac/tree/main/packages/dsh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BruceXcluding/dev-almanac.git",
+    "directory": "packages/dsh"
+  },
+  "engines": { "node": ">=20" },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": ">=0.1.0-rc.1 <0.3.0-0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": { "optional": true }
+  },
+  "dsh": {
+    "engines": { "dsh": ">=0.1.0-rc.1 <0.3.0-0" },
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": {
+      "platform": "web",
+      "inject": ["@deepseek-ai/dsh-client-ui-sidebar-right"]
+    }
+  }
+}
