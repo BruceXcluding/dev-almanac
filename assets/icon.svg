@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs><clipPath id="tile"><rect width="1024" height="1024" rx="224"/></clipPath></defs>
+  <g clip-path="url(#tile)">
+    <rect width="1024" height="1024" fill="#faf0e2"/>
+    <path d="M0 760 C 220 700, 420 800, 640 740 S 940 700, 1024 730 V 1024 H 0 Z" fill="#efd6b1"/>
+  </g>
+  <rect x="262" y="226" width="520" height="600" rx="40" fill="#000" opacity=".08"/>
+  <rect x="254" y="210" width="516" height="600" rx="40" fill="#e9e2d3"/>
+  <rect x="242" y="196" width="520" height="600" rx="40" fill="#fffdf8" stroke="#e2dccd" stroke-width="6"/>
+  <path d="M242 236 a40 40 0 0 1 40 -40 h440 a40 40 0 0 1 40 40 v110 h-520 Z" fill="#b83227"/>
+  <circle cx="392" cy="236" r="16" fill="#000" opacity=".28"/>
+  <circle cx="612" cy="236" r="16" fill="#000" opacity=".28"/>
+  <rect x="378" y="150" width="28" height="96" rx="14" fill="#3f3f3f"/>
+  <rect x="598" y="150" width="28" height="96" rx="14" fill="#3f3f3f"/>
+  <text x="502" y="690" text-anchor="middle" font-size="330" font-weight="700" fill="#1f1f1f" font-family="PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, sans-serif">宜</text>
+  <g transform="rotate(14 820 620)">
+    <rect x="800" y="380" width="40" height="420" rx="18" fill="#ecd9ab" stroke="#b9975d" stroke-width="5"/>
+    <rect x="808" y="420" width="24" height="120" rx="6" fill="#b83227"/>
+  </g>
+</svg>

@@ -7,7 +7,7 @@
 <p align="center"><sub>程序员黄历 · 今日星运 · 求签 · 离线 · 确定性 · 不耗 token · 不打扰正事</sub></p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/version-0.8.1-b83227?style=flat-square" alt="version 0.8.1">
+<img src="https://img.shields.io/badge/version-0.8.2-b83227?style=flat-square" alt="version 0.8.2">
 <img src="https://img.shields.io/badge/tests-51%20passing-5b8c5a?style=flat-square" alt="51 tests passing">
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/BruceXcluding/dev-almanac?style=flat-square" alt="license"></a>
 <a href="https://claude.com/product/claude-code" title="Claude Code"><img src="https://img.shields.io/badge/Claude%20Code-mod-D97757?style=flat-square" alt="Claude Code mod"></a>

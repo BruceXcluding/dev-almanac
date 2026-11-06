@@ -1,10 +1,22 @@
 {
   "name": "dev-almanac",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "程序员黄历 + 今日星运: a playful, offline daily almanac and horoscope for coders, above the prompt, in the status line, in /almanac and /qiuqian.",
-  "author": { "name": "BruceXcluding", "url": "https://github.com/BruceXcluding" },
+  "author": {
+    "name": "BruceXcluding",
+    "url": "https://github.com/BruceXcluding"
+  },
+  "homepage": "https://github.com/BruceXcluding/dev-almanac",
+  "repository": "https://github.com/BruceXcluding/dev-almanac",
   "license": "MIT",
-  "keywords": ["almanac", "huangli", "horoscope", "lunar", "fun", "chinese"],
+  "keywords": [
+    "almanac",
+    "huangli",
+    "horoscope",
+    "lunar",
+    "fun",
+    "chinese"
+  ],
   "types": "./types/index.d.ts",
   "userConfig": {
     "birthday": {
@@ -17,14 +29,21 @@
       "type": "string",
       "title": "Language 语言",
       "description": "zh: 中文 (default). en: English.",
-      "options": ["zh", "en"],
+      "options": [
+        "zh",
+        "en"
+      ],
       "default": "zh"
     },
     "level": {
       "type": "string",
       "title": "Level 热闹程度",
       "description": "lively: card above the prompt, status line, 大吉 toasts. quiet: status line and commands only. off: commands only.",
-      "options": ["lively", "quiet", "off"],
+      "options": [
+        "lively",
+        "quiet",
+        "off"
+      ],
       "default": "lively"
     }
   }
