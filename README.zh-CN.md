@@ -7,8 +7,8 @@
 <p align="center"><sub>程序员黄历 · 今日星运 · 求签 · 离线 · 确定性 · 不耗 token · 不打扰正事</sub></p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/version-0.8.2-b83227?style=flat-square" alt="version 0.8.2">
-<img src="https://img.shields.io/badge/tests-51%20passing-5b8c5a?style=flat-square" alt="51 tests passing">
+<img src="https://img.shields.io/badge/version-0.8.3-b83227?style=flat-square" alt="version 0.8.3">
+<img src="https://img.shields.io/badge/tests-71%20passing-5b8c5a?style=flat-square" alt="71 tests passing">
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/BruceXcluding/dev-almanac?style=flat-square" alt="license"></a>
 <a href="https://claude.com/product/claude-code" title="Claude Code"><img src="https://img.shields.io/badge/Claude%20Code-mod-D97757?style=flat-square" alt="Claude Code mod"></a>
 </p>
@@ -29,6 +29,8 @@
 | **状态栏** | 一条简短信息，例如 `🀄 宜写文档 ☿ 水逆` |
 | **黄历面板**（`/almanac`） | 完整的一天：季节明信片、宜忌、冲煞、节气、十二时辰、星运和签筒 |
 | **求签**（`/qiuqian`） | 100 支签中的一支，从上上签到下下签，每支附一首程序员签诗 |
+
+卡片在会话开始时显示，发送第一条提示后收起；斜杠命令不会让它收起。其他 mod 在输入框上方的横条显示在卡片下方。
 
 ## 快速开始
 

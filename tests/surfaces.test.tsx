@@ -116,6 +116,22 @@ test('the band: one line, expands on press, gone after the first prompt', async 
   }
 })
 
+test('the band keeps what other mods draw there, and a slash command leaves it up', async ($, on) => {
+  world(on)
+  await start($)
+  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const both = await textOf(ui)
+  expect(both).toContain('九月廿七 癸未日')
+  expect(both).toContain('engine')
+  await ui.press({ key: 'toggle' })
+  expect(await textOf(ui)).toContain('engine')
+  await ui.unmount()
+  await $.prompt.submit({ text: '/reload-plugins', command: { name: 'reload-plugins', args: '' }, wait: false, origin: { kind: 'composer' } } as never)
+  const after = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  expect(await textOf(after)).toContain('九月廿七')
+  await after.unmount()
+})
+
 test('the prompt passes through untouched', async ($, on) => {
   const { w } = world(on)
   await start($)
@@ -130,7 +146,7 @@ test('with a birthday: sign, lucky color border, 冲 warning for a 牛', { optio
   const line = await textOf(ui)
   expect(line).toContain('♊ ')
   expect(line).toContain('⚠')
-  const box = (await ui.findAll({ type: 'Box' }))[0]
+  const box = (await ui.findAll({ type: 'Box' })).find(b => b.props.borderStyle)
   expect(String(box?.props.borderColor)).toMatch(/^#[0-9a-f]{6}$/)
   await ui.press({ key: 'toggle' })
   expect(await textOf(ui)).toContain('今日冲属牛（你）')
@@ -306,7 +322,7 @@ test('a 大吉 day: special card and one toast a day', async ($, on) => {
   expect(w.toasts).toEqual(['✨ 今日大吉！宜发版、宜合并、宜请奶茶。'])
   expect(w.status.at(-1)).toMatch(/^🀄✨ 大吉 宜/)
   const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
-  const box = (await ui.findAll({ type: 'Box' }))[0]
+  const box = (await ui.findAll({ type: 'Box' })).find(b => b.props.borderStyle)
   expect(box?.props.borderStyle).toBe('double')
   await ui.press({ key: 'toggle' })
   expect(await textOf(ui)).toContain('大吉之日')

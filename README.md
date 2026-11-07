@@ -7,8 +7,8 @@
 <p align="center"><sub>Chinese almanac · daily horoscope · fortune slips · offline · deterministic · no tokens · never blocks your work</sub></p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/version-0.8.2-b83227?style=flat-square" alt="version 0.8.2">
-<img src="https://img.shields.io/badge/tests-70%20passing-5b8c5a?style=flat-square" alt="70 tests passing">
+<img src="https://img.shields.io/badge/version-0.8.3-b83227?style=flat-square" alt="version 0.8.3">
+<img src="https://img.shields.io/badge/tests-71%20passing-5b8c5a?style=flat-square" alt="71 tests passing">
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/BruceXcluding/dev-almanac?style=flat-square" alt="license"></a>
 <a href="https://claude.com/product/claude-code" title="Claude Code"><img src="https://img.shields.io/badge/Claude%20Code-mod-D97757?style=flat-square" alt="Claude Code mod"></a>
 </p>
@@ -29,6 +29,8 @@ The mod also gives a horoscope for the twelve signs, a fortune tube with 100 sli
 | **Status line** | One short entry, such as `🀄 Do: write docs ☿ retro` |
 | **Almanac pane** (`/almanac`) | The full day: a seasonal postcard, the do and don't lists, the clash, the solar term, the twelve double-hours, the horoscope and the fortune tube |
 | **Fortune slips** (`/qiuqian`) | One of 100 slips in seven grades, from Supreme to Dire, each with a two-line verse about code |
+
+The card shows when a session starts. It folds away after your first prompt; slash commands leave it up. Other mods' bars above the prompt show under it.
 
 The mod shows Chinese by default. To show English, run `/almanac en` or press **🌐 English** in the pane.
 

@@ -1,6 +1,6 @@
 {
   "name": "dev-almanac",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "程序员黄历 + 今日星运: a playful, offline daily almanac and horoscope for coders, above the prompt, in the status line, in /almanac and /qiuqian.",
   "author": {
     "name": "BruceXcluding",

@@ -465,11 +465,12 @@ export const register: Register = (on, options) => {
     return next(e)
   })
 
-  // The card collapses after the first prompt; the status line carries on.
+  // The card collapses after the first real prompt (a slash command such as
+  // /almanac or /reload-plugins leaves it up); the status line carries on.
   // The prompt itself passes on untouched.
   on('prompt.submit', async ($, e, next) => {
     try {
-      if ((await read($, band)) !== 'gone') await update($, band, () => 'gone')
+      if (!e.command && (await read($, band)) !== 'gone') await update($, band, () => 'gone')
       await refreshStatus($, settings)
     } catch {
       // ignore
@@ -502,10 +503,19 @@ export const register: Register = (on, options) => {
     if (settings.level !== 'lively' || e.props.hasSurvey) return next(e)
     const mode = await read($, band)
     if (mode === 'gone') return next(e)
+    // Other mods draw in this band too (a translation bar, say): the card sits
+    // above whatever the rest of the chain draws, and never replaces it.
+    const below = await next(e)
     const { t, ms } = await todayNow($, settings)
     const w = words(t.lang)
     const L = LABELS[t.lang]
     const { Box, Text, Button } = $.ui.resolve(e)
+    const stack = (card: typeof below) => (
+      <Box flexDirection="column" gap={1}>
+        {card}
+        {below ?? ''}
+      </Box>
+    )
     const a = t.almanac
     const mine = t.mySign !== undefined ? t.horoscopeOf(t.mySign) : undefined
     const accent = a.isDaJi ? DAJI : mine?.color.hex ?? 'gray'
@@ -529,7 +539,7 @@ export const register: Register = (on, options) => {
       const ticker = tickerOf(t)
       const at = (await read($, tick)) % ticker.length
       const dots = ticker.map((_, i) => (i === at ? '●' : '·')).join('')
-      return (
+      return stack(
         <Box borderStyle={style} borderColor={accent} paddingX={1} flexDirection="row" gap={1}>
           <Box flexGrow={1} flexShrink={1}>
             <Text wrap="truncate-end">
@@ -546,7 +556,7 @@ export const register: Register = (on, options) => {
     }
     const nowZhi = zhiIndexOf(new Date(ms).getHours())
     const r = (label: string, value: Child | Child[]) => row({ Box, Text }, t.lang, label, value)
-    return (
+    return stack(
       <Box borderStyle={style} borderColor={accent} paddingX={1} flexDirection="column">
         <Box flexDirection="row" gap={1}>
           <Box flexGrow={1} flexShrink={1}>

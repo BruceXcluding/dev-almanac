@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## 0.8.3 - 2026-11-07
+
+### Fixed
+- The card above the prompt no longer takes the whole band: other mods' bars (a translation bar, say) show under it.
+- A slash command such as `/almanac` or `/reload-plugins` no longer hides the card. Only a real prompt does.
+
 ## 0.8.2 - 2026-11-06
 
 ### Added
