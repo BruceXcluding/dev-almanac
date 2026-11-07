@@ -23,6 +23,10 @@ declare module 'claude-code' {
       isActivitiesOpen: boolean
       /** The birthday set in the UI (mirrors $.store); null: the setting's. */
       birthday: string | null
+      /** A real prompt has been sent this session: the card's ticker holds still. */
+      hasPrompted: boolean
+      /** The card is turned off in every session (mirrors $.store 'cardOff'). */
+      isCardOff: boolean
       /** The pane's birthday field is open for editing. */
       isEditingBirthday: boolean
       /** The pane's entrance: the terminal's frame, or 0 when still. */

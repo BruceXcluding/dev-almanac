@@ -4,6 +4,13 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## 0.8.4 - 2026-11-07
+
+### Changed
+- The card stays above the prompt for the whole session. A prompt folds an open card back to one line, and the ticker holds still once work starts.
+- **Hide** (this session) and **Turn off** (every session) buttons on the card. `/almanac card` shows it again; `/almanac card off` turns it off.
+- More space between the open card's content and its buttons.
+
 ## 0.8.3 - 2026-11-07
 
 ### Fixed

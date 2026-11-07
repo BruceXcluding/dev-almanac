@@ -37,6 +37,8 @@ const birthdayPick = atom({ plugin: 'dev-almanac', key: 'birthday' } as const, n
 const isShaking = atom({ plugin: 'dev-almanac', key: 'isShaking' } as const, false)
 const intro = atom({ plugin: 'dev-almanac', key: 'intro' } as const, 0)
 const introRun = atom({ plugin: 'dev-almanac', key: 'introRun' } as const, 0)
+const hasPrompted = atom({ plugin: 'dev-almanac', key: 'hasPrompted' } as const, false)
+const isCardOff = atom({ plugin: 'dev-almanac', key: 'isCardOff' } as const, false)
 const isActivitiesOpen = atom({ plugin: 'dev-almanac', key: 'isActivitiesOpen' } as const, false)
 const isEditingBirthday = atom({ plugin: 'dev-almanac', key: 'isEditingBirthday' } as const, false)
 
@@ -419,6 +421,12 @@ async function playIntro($: EngineInterface, base: Settings) {
   })
 }
 
+// Turns the card off (or back on) in every session; the status line stays.
+async function setCardOff($: EngineInterface, isOff: boolean) {
+  await update($, isCardOff, () => isOff)
+  await $.store.set('cardOff', isOff)
+}
+
 export const register: Register = (on, options) => {
   const settings = settingsOf(options)
 
@@ -431,7 +439,7 @@ export const register: Register = (on, options) => {
           description: isPane
             ? '程序员黄历 + 今日星运 · zh|en 切换语言 · birthday YYYY-MM-DD 设置生日'
             : '求签：今日一签 (draw today’s fortune slip)',
-          ...(isPane ? { argumentHint: '[zh|en | birthday YYYY-MM-DD]' } : {}),
+          ...(isPane ? { argumentHint: '[zh|en | birthday YYYY-MM-DD | card [off]]' } : {}),
         })
       } catch {
         // A name this build refuses leaves the others registered.
@@ -440,6 +448,7 @@ export const register: Register = (on, options) => {
     try {
       const saved = await $.store.get('lang')
       if (saved === 'zh' || saved === 'en') await update($, langPick, () => saved)
+      if ((await $.store.get('cardOff')) === true) await update($, isCardOff, () => true)
       const savedBirthday = await $.store.get('birthday')
       if (typeof savedBirthday === 'string' && parseBirthday(savedBirthday)) await update($, birthdayPick, () => savedBirthday)
       const { t } = await todayNow($, settings)
@@ -450,11 +459,13 @@ export const register: Register = (on, options) => {
       }
       const stored = (await $.store.get('slip')) as DrawnSlip | undefined
       if (stored && stored.date === t.almanac.date) await update($, slip, () => stored)
-      // The card's ticker, until the card steps aside.
+      // The card's ticker, until the first real prompt.
       if (settings.level === 'lively') {
         const timer = $.clock.every(TICK_MS, () => {
           void (async () => {
-            if ((await read($, band)) === 'gone') return timer.cancel()
+            // Work has started: the card holds still from here on.
+            if (await read($, hasPrompted)) return timer.cancel()
+            if ((await read($, band)) === 'gone' || (await read($, isCardOff))) return
             await update($, tick, n => n + 1)
           })().catch(() => timer.cancel())
         })
@@ -465,12 +476,15 @@ export const register: Register = (on, options) => {
     return next(e)
   })
 
-  // The card collapses after the first real prompt (a slash command such as
-  // /almanac or /reload-plugins leaves it up); the status line carries on.
-  // The prompt itself passes on untouched.
+  // The card stays for the whole session; a real prompt folds an open card
+  // back to its one line (a slash command leaves it as it is). Hide and Turn
+  // off on the card take it away. The prompt itself passes on untouched.
   on('prompt.submit', async ($, e, next) => {
     try {
-      if (!e.command && (await read($, band)) !== 'gone') await update($, band, () => 'gone')
+      if (!e.command) {
+        await update($, hasPrompted, () => true)
+        if ((await read($, band)) === 'open') await update($, band, () => 'card')
+      }
       await refreshStatus($, settings)
     } catch {
       // ignore
@@ -480,6 +494,13 @@ export const register: Register = (on, options) => {
 
   on('command.run', { command: ['almanac', 'huangli', '黄历'] }, async ($, e) => {
     const [verb = '', ...rest] = e.args.trim().split(/\s+/)
+    if (['card', '卡片'].includes(verb.toLowerCase())) {
+      const isOff = ['off', 'hide', '关闭'].includes((rest[0] ?? '').toLowerCase())
+      const { t } = await todayNow($, settings)
+      await setCardOff($, isOff)
+      if (!isOff) await update($, band, () => 'card')
+      return { text: isOff ? words(t.lang).cardOff : words(t.lang).cardOn }
+    }
     if (['birthday', 'bday', '生日'].includes(verb.toLowerCase())) {
       const out = await setBirthday($, settings, rest.join(' ') || 'clear')
       const { t } = await todayNow($, settings)
@@ -502,7 +523,7 @@ export const register: Register = (on, options) => {
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
     if (settings.level !== 'lively' || e.props.hasSurvey) return next(e)
     const mode = await read($, band)
-    if (mode === 'gone') return next(e)
+    if (mode === 'gone' || (await read($, isCardOff))) return next(e)
     // Other mods draw in this band too (a translation bar, say): the card sits
     // above whatever the rest of the chain draws, and never replaces it.
     const below = await next(e)
@@ -527,6 +548,26 @@ export const register: Register = (on, options) => {
         plain
         label={mode === 'open' ? `▴ ${w.less}` : `▾ ${w.details}`}
         onPress={() => update($, band, m => (m === 'open' ? 'card' : 'open'))}
+      />,
+      <Button
+        key="hide"
+        plain
+        dimColor
+        label={w.hide}
+        onPress={async () => {
+          await update($, band, () => 'gone')
+          $.ui.toast(w.cardHidden)
+        }}
+      />,
+      <Button
+        key="off"
+        plain
+        dimColor
+        label={w.turnOff}
+        onPress={async () => {
+          await setCardOff($, true)
+          $.ui.toast(w.cardOff)
+        }}
       />,
     ]
     const badges = [
@@ -576,7 +617,7 @@ export const register: Register = (on, options) => {
           ? r(`✦ ${signName(mine.sign, t.lang)}`, [starText(Text, mine.overall), `  ${moodOf(t, mine.overall)} · ${mine.item} · ${mine.number.n}`])
           : <Text dimColor>{`${w.noBirthday} → ${w.fullAlmanac}`}</Text>}
         {mine ? <Text italic dimColor>{`“${mine.advice}”`}</Text> : ''}
-        <Box flexDirection="row" gap={2}>
+        <Box flexDirection="row" gap={2} marginTop={1}>
           <Button key="pane" variant="primary" label={`🀄 ${w.fullAlmanac}`} onPress={() => openPane($, settings)} />
           <Button
             key="draw"

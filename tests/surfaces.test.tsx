@@ -89,7 +89,7 @@ test('status line and commands at session start', async ($, on) => {
   expect(w.toasts).toEqual([])
 })
 
-test('the band: one line, expands on press, gone after the first prompt', async ($, on) => {
+test('the band: one line, expands on press, folds back after a prompt', async ($, on) => {
   world(on)
   await start($)
   for (const surface of ['terminal', 'desktop'] as const) {
@@ -108,12 +108,44 @@ test('the band: one line, expands on press, gone after the first prompt', async 
     expect(await textOf(ui)).not.toContain('水逆中')
     await ui.unmount()
   }
+  const opened = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  await opened.press({ key: 'toggle' })
+  expect(await textOf(opened)).toContain('⛔ 忌')
+  await opened.unmount()
   await $.prompt.submit({ text: 'fix the build', wait: false, origin: { kind: 'composer' } })
   for (const surface of ['terminal', 'desktop'] as const) {
     const ui = await $.ui.mount({ ...BAND, surface })
-    expect(await textOf(ui)).toBe('engine')
+    const line = await textOf(ui)
+    expect(line).toContain('九月廿七 癸未日')
+    expect(line).not.toContain('水逆中')
     await ui.unmount()
   }
+})
+
+test('Hide takes the card away for the session, Turn off for every session; /almanac card brings it back', async ($, on) => {
+  const { w } = world(on)
+  await start($)
+  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  await ui.press({ key: 'hide' })
+  expect(await textOf(ui)).toBe('engine')
+  expect(w.toasts.at(-1)).toContain('/almanac card')
+  await ui.unmount()
+  expect(String((await $.command.run({ command: 'almanac', args: 'card', origin: { kind: 'composer' }, presentation: { isFullscreen: false, columns: 100 } })).text)).toBe('黄历卡片已打开。')
+  const back = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  expect(await textOf(back)).toContain('九月廿七')
+  await back.press({ key: 'off' })
+  expect(await textOf(back)).toBe('engine')
+  await back.unmount()
+  // A new session remembers it is off; the status line stays.
+  await start($)
+  const later = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  expect(await textOf(later)).toBe('engine')
+  await later.unmount()
+  expect(w.status.at(-1)).toBe('🀄 宜写文档 ☿ 水逆')
+  await $.command.run({ command: 'almanac', args: 'card on', origin: { kind: 'composer' }, presentation: { isFullscreen: false, columns: 100 } })
+  const on2 = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  expect(await textOf(on2)).toContain('九月廿七')
+  await on2.unmount()
 })
 
 test('the band keeps what other mods draw there, and a slash command leaves it up', async ($, on) => {
@@ -268,7 +300,7 @@ test('the draw button shakes the tube, then shows the slip', async ($, on) => {
   }
 })
 
-test('the card ticker moves on, and stops once the card is gone', async ($, on) => {
+test('the card ticker moves on, and holds still once work starts', async ($, on) => {
   const { clock } = world(on)
   await start($)
   const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })

@@ -7,8 +7,8 @@
 <p align="center"><sub>程序员黄历 · 今日星运 · 求签 · 离线 · 确定性 · 不耗 token · 不打扰正事</sub></p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/version-0.8.3-b83227?style=flat-square" alt="version 0.8.3">
-<img src="https://img.shields.io/badge/tests-71%20passing-5b8c5a?style=flat-square" alt="71 tests passing">
+<img src="https://img.shields.io/badge/version-0.8.4-b83227?style=flat-square" alt="version 0.8.4">
+<img src="https://img.shields.io/badge/tests-72%20passing-5b8c5a?style=flat-square" alt="72 tests passing">
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/BruceXcluding/dev-almanac?style=flat-square" alt="license"></a>
 <a href="https://claude.com/product/claude-code" title="Claude Code"><img src="https://img.shields.io/badge/Claude%20Code-mod-D97757?style=flat-square" alt="Claude Code mod"></a>
 </p>
@@ -30,7 +30,7 @@
 | **黄历面板**（`/almanac`） | 完整的一天：季节明信片、宜忌、冲煞、节气、十二时辰、星运和签筒 |
 | **求签**（`/qiuqian`） | 100 支签中的一支，从上上签到下下签，每支附一首程序员签诗 |
 
-卡片在会话开始时显示，发送第一条提示后收起；斜杠命令不会让它收起。其他 mod 在输入框上方的横条显示在卡片下方。
+卡片在整个会话中都显示在输入框上方。发送提示后，展开的卡片收回为一行。其他 mod 在输入框上方的横条显示在卡片下方。点击卡片上的 **隐藏**，卡片在本次会话中不再显示；点击 **关闭**，所有会话都不再显示。输入 `/almanac card` 可重新显示。两种情况下状态栏都照常显示。
 
 ## 快速开始
 
@@ -79,6 +79,7 @@ codex plugin add dev-almanac@dev-almanac
 | `/almanac` | 打开黄历面板。`/huangli` 作用相同。 |
 | `/almanac en` | 切换为英文。`/almanac zh` 切换为中文。 |
 | `/almanac birthday 1997-06-01` | 设置生日。`/almanac birthday clear` 清除生日。 |
+| `/almanac card` | 重新显示输入框上方的卡片。`/almanac card off` 关闭卡片。 |
 | `/qiuqian` | 求一支签。`/fortune` 作用相同。每求一次都换一支新签。 |
 
 ## 黄历
