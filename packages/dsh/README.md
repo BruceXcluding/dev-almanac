@@ -18,7 +18,7 @@ This is the dsh version of [dev-almanac](https://github.com/BruceXcluding/dev-al
 1. Run this command. It installs the plugin from its release:
 
    ```bash
-   dsh plugin --profile web add https://github.com/BruceXcluding/dev-almanac/releases/download/dsh-v0.1.1/dsh-dev-almanac-0.1.1.tgz
+   dsh plugin --profile web add https://github.com/BruceXcluding/dev-almanac/releases/download/dev-almanac-v0.1.1/dsh-dev-almanac-0.1.1.tgz
    ```
 
    You can also install it from the plugin store, or from the source with `github:BruceXcluding/dev-almanac#path:/packages/dsh`.
