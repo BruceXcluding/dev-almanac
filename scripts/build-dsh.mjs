@@ -53,7 +53,13 @@ if (process.argv.includes('--pack')) {
   const dist = join(root, 'dist')
   mkdirSync(dist, { recursive: true })
   const out = execFileSync('npm', ['pack', '--pack-destination', dist], { cwd: pkg, encoding: 'utf8' })
-  process.stdout.write(`packed ${join(dist, out.trim().split('\n').at(-1))}\n`)
+  const packed = join(dist, out.trim().split('\n').at(-1))
+  // The same tarball under a name without the version: the dsh plugin list
+  // installs releases/latest/download/dsh-dev-almanac.tgz, so every release
+  // of this repository must carry it, or installs from the store fail.
+  const latest = join(dist, 'dsh-dev-almanac.tgz')
+  copyFileSync(packed, latest)
+  process.stdout.write(`packed ${packed}\nand ${latest}\n`)
 } else {
   process.stdout.write(`built ${vendor}\n`)
 }

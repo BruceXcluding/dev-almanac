@@ -42,8 +42,10 @@ From the repository root:
 ```bash
 node scripts/build-dsh.mjs           # compiles hooks/*.ts into packages/dsh/vendor
 node --test tests/dsh.test.mjs
-node scripts/build-dsh.mjs --pack    # writes dist/dsh-dev-almanac-<version>.tgz
+node scripts/build-dsh.mjs --pack    # writes dist/dsh-dev-almanac-<version>.tgz and dist/dsh-dev-almanac.tgz
 ```
+
+Attach both tarballs to every release of this repository, including releases of the Claude Code mod. The dsh plugin list installs `releases/latest/download/dsh-dev-almanac.tgz`, so a latest release without that file breaks installs from the store.
 
 The build needs the `typescript` package. To use a copy from another folder, set `TYPESCRIPT_PATH`.
 
