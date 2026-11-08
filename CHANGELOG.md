@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## dsh 0.1.1 - 2026-11-08
+
+### Fixed
+- Installing from GitHub source (`github:BruceXcluding/dev-almanac#path:/packages/dsh`, the form a plugin store falls back to) left out `vendor/` and `LICENSE`, which were git-ignored, so the plugin did not load. In DSH Desktop the store showed `cannot get required service "loader" in inactive context`. Both are now in git, and a test checks that every relative import resolves.
+- The dsh version range now admits prerelease builds such as `0.2.2-rc.1`; node-semver only lets a prerelease through a comparator on its own version.
+
 ## 0.8.4 - 2026-11-07
 
 ### Changed

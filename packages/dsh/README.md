@@ -15,16 +15,17 @@ This is the dsh version of [dev-almanac](https://github.com/BruceXcluding/dev-al
 
 ## Install
 
-1. Download `dsh-dev-almanac-<version>.tgz` from the [releases](https://github.com/BruceXcluding/dev-almanac/releases).
-2. Run this command:
+1. Run this command. It installs the plugin from its release:
 
    ```bash
-   dsh plugin --profile web add ./dsh-dev-almanac-0.1.0.tgz
+   dsh plugin --profile web add https://github.com/BruceXcluding/dev-almanac/releases/download/dsh-v0.1.1/dsh-dev-almanac-0.1.1.tgz
    ```
 
-3. Restart dsh.
-4. Open a session, click **+** in the right sidebar, and select the almanac tab. Its name is **程序员黄历** in Chinese, the default, and **Programmer's almanac** in English.
-5. To show the tab in English, press **🌐 English** at its top.
+   You can also install it from the plugin store, or from the source with `github:BruceXcluding/dev-almanac#path:/packages/dsh`.
+
+2. Restart dsh.
+3. Open a session, click **+** in the right sidebar, and select the almanac tab. Its name is **程序员黄历** in Chinese, the default, and **Programmer's almanac** in English.
+4. To show the tab in English, press **🌐 English** at its top.
 
 ## Settings
 

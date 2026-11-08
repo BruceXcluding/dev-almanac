@@ -235,3 +235,24 @@ test('the web client draws a loaded day: postcard, 宜/忌, horoscope, 签筒', 
   const css = readFileSync(new URL('../packages/dsh/client/client.js', import.meta.url), 'utf8')
   assert.match(css, /--dsw-alias-label-primary/)
 })
+
+test('a GitHub-source install has everything: vendor/ and LICENSE are tracked, every relative import resolves', async () => {
+  const { execFileSync } = await import('node:child_process')
+  const { existsSync, readdirSync } = await import('node:fs')
+  const root = new URL('../', import.meta.url).pathname
+  const pkg = join(root, 'packages', 'dsh')
+  // git check-ignore exits 1 when nothing ignores the path.
+  for (const path of ['packages/dsh/vendor/core/almanac.js', 'packages/dsh/vendor/core/vendor/lunar.js', 'packages/dsh/LICENSE']) {
+    assert.throws(() => execFileSync('git', ['check-ignore', '-q', path], { cwd: root }), `${path} must not be git-ignored`)
+  }
+  for (const dir of ['src', 'client']) {
+    for (const file of readdirSync(join(pkg, dir)).filter(f => f.endsWith('.js'))) {
+      const text = readFileSync(join(pkg, dir, file), 'utf8')
+      for (const [, spec] of text.matchAll(/from '(\.{1,2}\/[^']+)'/g)) {
+        assert.ok(existsSync(join(pkg, dir, spec)), `${dir}/${file} imports ${spec}`)
+      }
+    }
+  }
+  const manifest = JSON.parse(readFileSync(join(pkg, 'package.json'), 'utf8'))
+  for (const entry of manifest.files) if (!entry.includes('*')) assert.ok(existsSync(join(pkg, entry)), `files lists ${entry}`)
+})
